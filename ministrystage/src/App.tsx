@@ -87,7 +87,7 @@ const App: React.FC = () => {
 
   return (
     <div 
-      className="flex h-screen w-screen overflow-hidden text-white" 
+      className="flex flex-col h-screen w-screen overflow-hidden text-white" 
       style={{ background: 'var(--ms-surface-0)', fontFamily: 'Inter, sans-serif' }}
     >
       <UpdaterModal />
