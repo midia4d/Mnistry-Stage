@@ -38,6 +38,7 @@ jobs:
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: Install frontend dependencies
+        working-directory: ./ministrystage
         run: npm install
 
       - name: Build and Release Tauri App
@@ -47,6 +48,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
+          projectPath: './ministrystage'
           tagName: ${{ github.ref_name }}
           releaseName: 'MinistryStage ${{ github.ref_name }}'
           releaseBody: 'Veja os detalhes das novas funcionalidades nesta versão.'
