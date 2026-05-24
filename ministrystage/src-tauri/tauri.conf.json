@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "MinistryStage",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "identifier": "com.ministrystage.app",
   "build": {
     "frontendDist": "../dist",
@@ -55,7 +55,7 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://github.com/gabrielesetevao/MinistryStage/releases/latest/download/updater.json"
+        "https://github.com/midia4d/Mnistry-Stage/releases/latest/download/updater.json"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEFBNDFCNTJCQjE3QzBCODQKUldTRUMzeXhLN1ZCcW51Z1JvQ0IwNXdFaEdMZkxpdDNDUVdKam5VZHpSRDA5QnNwTTdaQVk1U3gK"
     }
