@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MinistryStage - Stage Display</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+  <header>
+    <h1>MinistryStage <span class="badge">STAGE</span></h1>
+    <div id="status" class="status-disconnected">Desconectado</div>
+  </header>
+  
+  <main>
+    <section class="card timer-card">
+      <h2>Contagem Regressiva</h2>
+      <div class="timer-display" id="timer">00:00</div>
+      <div class="controls">
+        <button onclick="startTimer(30)">30s</button>
+        <button onclick="startTimer(60)">60s</button>
+        <button onclick="startTimer(90)">90s</button>
+        <button onclick="stopTimer()" class="btn-danger">Stop</button>
+      </div>
+    </section>
+
+    <section class="card current-scene">
+      <h2>Cena Atual</h2>
+      <div class="lyrics-preview" id="current-lyrics">
+        Nenhuma cena ativa
+      </div>
+    </section>
+
+    <section class="card next-scene">
+      <h2>Próxima Cena</h2>
+      <div class="lyrics-preview" id="next-lyrics">
+        ...
+      </div>
+    </section>
+
+    <section class="action-bar">
+      <button onclick="sendCommand('prev_scene')" class="btn-nav">Anterior</button>
+      <button onclick="sendCommand('blackout')" class="btn-blackout">BLACKOUT</button>
+      <button onclick="sendCommand('next_scene')" class="btn-nav">Próxima</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+[package]
+name = "ministrystage"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["MinistryStage Team"]
+license = ""
+repository = ""
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "ministrystage_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.11.2", features = ["protocol-asset"] }
+tauri-plugin-shell = "2"
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = "0.21.0"
+futures-util = "0.3.30"
+tauri-plugin-dialog = "2.7.1"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-updater = "2"

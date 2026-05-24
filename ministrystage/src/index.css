@@ -1,0 +1,618 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   MINISTRYSTAGE — Design System — ProPresenter Dark
+   ===================================================== */
+
+:root {
+  /* ── Core Surfaces ── */
+  --ms-bg:            #0a0a0a;
+  --ms-surface-0:     #000000;
+  --ms-surface-1:     #111111;
+  --ms-surface-2:     #1a1a1a;
+  --ms-surface-3:     #222222;
+  --ms-surface-4:     #2a2a2a;
+
+  /* ── Borders ── */
+  --ms-border:        rgba(255,255,255,0.06);
+  --ms-border-hover:  rgba(255,255,255,0.12);
+  --ms-border-strong: rgba(255,255,255,0.18);
+
+  /* ── Accent: Warm White / Amber (ProPresenter style) ── */
+  --ms-accent:        #e8e8e8;
+  --ms-accent-dim:    rgba(232,232,232,0.12);
+  --ms-accent-glow:   rgba(255,255,255,0.08);
+
+  /* ── Semantic Colors ── */
+  --ms-green:         #22c55e;
+  --ms-green-dim:     rgba(34,197,94,0.15);
+  --ms-red:           #ef4444;
+  --ms-red-dim:       rgba(239,68,68,0.15);
+  --ms-amber:         #f59e0b;
+  --ms-amber-dim:     rgba(245,158,11,0.15);
+  --ms-blue:          #3b82f6;
+  --ms-blue-dim:      rgba(59,130,246,0.15);
+  --ms-teal:          #14b8a6;
+
+  /* ── Typography ── */
+  --ms-text-1:        #f5f5f5;
+  --ms-text-2:        #999999;
+  --ms-text-3:        #555555;
+  --ms-text-4:        #333333;
+
+  /* ── Gradients ── */
+  --ms-grad-accent:   linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  --ms-grad-live:     linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  --ms-grad-danger:   linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  --ms-grad-subtle:   linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+
+  /* ── Elevation shadows ── */
+  --ms-shadow-sm:     0 1px 3px rgba(0,0,0,0.5);
+  --ms-shadow-md:     0 4px 16px rgba(0,0,0,0.6);
+  --ms-shadow-lg:     0 8px 32px rgba(0,0,0,0.7);
+  --ms-shadow-xl:     0 16px 64px rgba(0,0,0,0.8);
+
+  /* ── Radius ── */
+  --ms-radius-xs:  4px;
+  --ms-radius-sm:  6px;
+  --ms-radius-md:  8px;
+  --ms-radius-lg:  12px;
+  --ms-radius-xl:  16px;
+  --ms-radius-2xl: 20px;
+
+  /* ── Transition ── */
+  --ms-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ms-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Elevação — usada em tooltips e dropdowns */
+  --ms-surface-elevated: #222222;
+}
+
+/* =====================================================
+   BASE RESET
+   ===================================================== */
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--ms-bg);
+    color: var(--ms-text-1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'ss01', 'cv01';
+  }
+
+  /* Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.08) transparent;
+  }
+  *::-webkit-scrollbar { width: 3px; height: 3px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.2);
+  }
+}
+
+/* =====================================================
+   COMPONENT PRIMITIVES
+   ===================================================== */
+
+@layer components {
+
+  /* ── Glass Surface ── */
+  .ms-glass {
+    background: rgba(17, 17, 17, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--ms-border);
+  }
+
+  /* ── Surface Cards ── */
+  .ms-surface {
+    background: var(--ms-surface-2);
+    border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius-lg);
+  }
+
+  .ms-surface-elevated {
+    background: var(--ms-surface-3);
+    border: 1px solid var(--ms-border-hover);
+    border-radius: var(--ms-radius-lg);
+    box-shadow: var(--ms-shadow-md);
+  }
+
+  /* ── Primary Button (subtle white) ── */
+  .ms-btn-primary {
+    @apply flex items-center justify-center gap-2 font-semibold rounded-lg transition-all;
+    background: var(--ms-surface-3);
+    color: var(--ms-text-1);
+    min-height: 36px;
+    padding: 0 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--ms-border-hover);
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .ms-btn-primary:hover {
+    background: var(--ms-surface-4);
+    border-color: var(--ms-border-strong);
+  }
+  .ms-btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* ── Ghost Button ── */
+  .ms-btn-ghost {
+    @apply flex items-center justify-center gap-2 font-medium rounded-lg transition-all cursor-pointer;
+    background: transparent;
+    color: var(--ms-text-2);
+    border: 1px solid var(--ms-border);
+    min-height: 36px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+  .ms-btn-ghost:hover {
+    background: var(--ms-surface-2);
+    border-color: var(--ms-border-hover);
+    color: var(--ms-text-1);
+  }
+
+  /* ── Sidebar Icon Button ── */
+  .ms-sidebar-btn {
+    @apply flex items-center justify-center rounded-lg transition-all cursor-pointer relative;
+    width: 40px;
+    height: 40px;
+    color: var(--ms-text-3);
+    border: 1px solid transparent;
+    background: transparent;
+  }
+  .ms-sidebar-btn:hover {
+    background: var(--ms-surface-2);
+    color: var(--ms-text-2);
+    border-color: var(--ms-border);
+  }
+  .ms-sidebar-btn.active {
+    background: var(--ms-surface-3);
+    color: var(--ms-text-1);
+    border-color: var(--ms-border-hover);
+  }
+  .ms-sidebar-btn.active::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 20px;
+    background: var(--ms-text-1);
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ── Input ── */
+  .ms-input {
+    background: var(--ms-surface-1);
+    border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius-md);
+    color: var(--ms-text-1);
+    padding: 8px 12px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color var(--ms-transition), box-shadow var(--ms-transition);
+    outline: none;
+    width: 100%;
+  }
+  .ms-input::placeholder { color: var(--ms-text-4); }
+  .ms-input:focus {
+    border-color: var(--ms-border-strong);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.04);
+  }
+
+  /* ── Textarea ── */
+  .ms-textarea {
+    background: var(--ms-surface-1);
+    border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius-md);
+    color: var(--ms-text-1);
+    padding: 10px 12px;
+    font-size: 12px;
+    font-family: 'Inter', monospace;
+    line-height: 1.65;
+    transition: border-color var(--ms-transition), box-shadow var(--ms-transition);
+    outline: none;
+    width: 100%;
+    resize: vertical;
+    min-height: 160px;
+  }
+  .ms-textarea::placeholder { color: var(--ms-text-4); }
+  .ms-textarea:focus {
+    border-color: var(--ms-border-strong);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.04);
+  }
+
+  /* ── Badge ── */
+  .ms-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── Scene Tab ── */
+  .ms-scene-tab {
+    @apply flex flex-col items-center justify-center rounded-md font-semibold transition-all cursor-pointer select-none;
+    padding: 6px 4px;
+    min-width: 44px;
+    border: 1px solid var(--ms-border);
+    background: var(--ms-surface-1);
+    color: var(--ms-text-4);
+    font-size: 10px;
+    gap: 2px;
+  }
+  .ms-scene-tab:hover {
+    border-color: var(--ms-border-hover);
+    color: var(--ms-text-2);
+    background: var(--ms-surface-2);
+  }
+  .ms-scene-tab.active {
+    background: var(--ms-surface-3);
+    border-color: var(--ms-border-strong);
+    color: var(--ms-text-1);
+  }
+
+  /* ── Section Title ── */
+  .ms-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ms-text-3);
+    margin-bottom: 8px;
+  }
+
+  /* ── Divider ── */
+  .ms-divider {
+    height: 1px;
+    background: var(--ms-border);
+  }
+
+  /* ── Panel Row ── */
+  .ms-panel-row {
+    @apply flex items-center gap-2 px-3 py-2 rounded-md transition-all cursor-pointer;
+    border: 1px solid transparent;
+  }
+  .ms-panel-row:hover {
+    background: var(--ms-surface-2);
+    border-color: var(--ms-border);
+  }
+  .ms-panel-row.active {
+    background: var(--ms-surface-3);
+    border-color: var(--ms-border-hover);
+  }
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes lyricSlide {
+  from { opacity: 0; transform: translateY(10px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Composition: entrada com leve profundidade 3D ── */
+@keyframes compositionEnter {
+  from {
+    opacity: 0;
+    transform: perspective(600px) translateZ(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(600px) translateZ(0) scale(1);
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ── Flash / Burst ao disparar slide (camera flash effect) ── */
+@keyframes flashBurst {
+  0%   { opacity: 0; }
+  15%  { opacity: 0.18; }
+  40%  { opacity: 0.08; }
+  100% { opacity: 0; }
+}
+
+/* ── Scan line: varre a tela ao vivo ── */
+@keyframes scanLine {
+  from { transform: translateY(-100%); opacity: 0.6; }
+  60%  { opacity: 0.3; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+
+/* ── Glow pulse verde para borda da tela ao vivo ── */
+@keyframes liveGlowPulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(34,197,94,0.20), 0 0 12px rgba(34,197,94,0.08); }
+  50%       { box-shadow: 0 0 0 1px rgba(34,197,94,0.45), 0 0 24px rgba(34,197,94,0.18); }
+}
+
+/* ── Ripple no botão Go Live ── */
+@keyframes rippleOut {
+  from { transform: scale(0.8); opacity: 0.7; }
+  to   { transform: scale(2.4); opacity: 0; }
+}
+
+/* ── Shimmer loading placeholder ── */
+@keyframes shimmerLoad {
+  0%   { background-position: -300% 0; }
+  100% { background-position: 300% 0; }
+}
+
+/* ── Live dot pulse (mais suave) ── */
+@keyframes liveGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+}
+
+/* ── Entrada do slide de letras com bounce leve ── */
+@keyframes slideEnterBounce {
+  from { opacity: 0; transform: translateY(6px) scale(0.985); }
+  70%  { transform: translateY(-1px) scale(1.002); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  display: inline-block;
+  padding-right: 50vw;
+}
+
+.animate-fade-in-up       { animation: fadeInUp 0.25s ease both; }
+.animate-fade-in          { animation: fadeIn 0.2s ease both; }
+.animate-blink            { animation: blink 1.2s ease-in-out infinite; }
+.animate-lyric-in         { animation: lyricSlide 0.25s cubic-bezier(0.34,1.2,0.64,1) both; }
+.animate-composition-in   { animation: compositionEnter 0.3s cubic-bezier(0.34,1.1,0.64,1) both; }
+.animate-slide-enter      { animation: slideEnterBounce 0.28s cubic-bezier(0.34,1.2,0.64,1) both; }
+.animate-spin             { animation: spin 0.8s linear infinite; }
+.animate-slide-left       { animation: slideFromLeft 0.2s ease both; }
+
+/* ── Flash overlay (aplicado momentaneamente via JS) ── */
+.ms-flash-burst {
+  animation: flashBurst 0.45s ease-out forwards;
+}
+
+/* ── Scan line (aplicado junto ao flash) ── */
+.ms-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  pointer-events: none;
+  z-index: 60;
+  animation: scanLine 0.5s ease-out forwards;
+}
+
+/* ── Borda pulsante ao vivo ── */
+.ms-live-glow-border {
+  box-shadow: 0 0 0 1px rgba(34,197,94,0.45), 0 0 20px rgba(34,197,94,0.15);
+  animation: liveGlowPulse 2.5s ease-in-out infinite;
+}
+
+/* ── Shimmer para placeholders de thumbnail ── */
+.ms-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.08) 40%,
+    rgba(255,255,255,0.03) 80%
+  );
+  background-size: 300% 100%;
+  animation: shimmerLoad 1.8s ease-in-out infinite;
+}
+
+/* =====================================================
+   UTILITIES
+   ===================================================== */
+
+/* No scrollbar */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Tooltip */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ms-surface-3);
+  border: 1px solid var(--ms-border-hover);
+  color: var(--ms-text-2);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: var(--ms-radius-sm);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+  z-index: 100;
+  box-shadow: var(--ms-shadow-md);
+}
+[data-tooltip]:hover::after { opacity: 1; }
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.ms-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.15s ease both;
+}
+
+.ms-modal {
+  background: var(--ms-surface-2);
+  border: 1px solid var(--ms-border-hover);
+  border-radius: var(--ms-radius-xl);
+  padding: 24px;
+  width: 520px;
+  max-width: 95vw;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: var(--ms-shadow-xl);
+  animation: fadeInUp 0.2s cubic-bezier(0.34,1.2,0.64,1) both;
+}
+
+/* =====================================================
+   LIVE INDICATOR
+   ===================================================== */
+
+.ms-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ms-green);
+  box-shadow: 0 0 6px rgba(34,197,94,0.7);
+  animation: liveGlow 1.6s ease-in-out infinite;
+}
+
+/* =====================================================
+   MEDIA SECTION DIVIDER
+   ===================================================== */
+
+.ms-media-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 8px;
+}
+
+.ms-media-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ms-border);
+}
+
+/* =====================================================
+   CROSSFADER CUSTOM TRACK
+   ===================================================== */
+
+.ms-crossfader {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: ew-resize;
+}
+
+.ms-crossfader::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ms-text-1);
+  cursor: ew-resize;
+  border: 2px solid rgba(255,255,255,0.15);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.ms-crossfader::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+/* =====================================================
+   RANGE SLIDER (Monochrome)
+   ===================================================== */
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ms-text-2);
+  cursor: pointer;
+  border: none;
+  transition: background var(--ms-transition);
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--ms-text-1);
+}
